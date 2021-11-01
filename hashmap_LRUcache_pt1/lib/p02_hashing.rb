@@ -8,7 +8,7 @@ class Array
     i = 1
     self.each do |ele|
       if ele.is_a?(Integer)
-        hash += (ele * i**2).hash
+        hash += (ele ^ i**2).hash
         i += 1
       elsif ele.is_a?(String)
         hash += ele.hash
@@ -25,7 +25,7 @@ class String
     hash = 0
     chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ /.,1234567890-=`!@#$%^&*()_+~|}{[];'?><"
     self.each_char.with_index do |char, i|
-      hash += (chars.index(char) * i**2).hash
+      hash += (chars.index(char) ^ i**2).hash
     end
     hash
   end

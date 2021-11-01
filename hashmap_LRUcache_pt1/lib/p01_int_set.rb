@@ -104,7 +104,7 @@ class ResizingIntSet
     @store.length
   end
 
-  def resize!
+  def resize! 
     new_buckets = Array.new(mod) { Array.new }
     duped = @store.dup.flatten
     @store.concat(new_buckets)
