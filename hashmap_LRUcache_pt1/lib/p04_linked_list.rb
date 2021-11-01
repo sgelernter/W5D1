@@ -56,10 +56,7 @@ class LinkedList
   end
 
   def include?(key)
-    self.each do |node|
-      return true if node.key == key
-    end
-    false
+    self.any? {|node| node.key == key}
   end
 
   def append(key, val)
@@ -92,9 +89,7 @@ class LinkedList
     end
   end
 
-
-  # uncomment when you have `each` working and `Enumerable` included
-  # def to_s
-  #   inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
-  # end
+  def to_s
+    inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
+  end
 end
