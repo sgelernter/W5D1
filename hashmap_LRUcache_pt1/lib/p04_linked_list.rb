@@ -16,8 +16,6 @@ class Node
   end
 
   def remove
-    # optional but useful, connects previous link to next link
-    # and removes self from list.
     @prev.next, @next.prev = self.next, self.prev
     self.next, self.prev = nil, nil
   end
@@ -51,9 +49,17 @@ class LinkedList
   end
 
   def get(key)
+    return nil unless self.include?(key)
+    self.each do |node|
+      return node.val if node.key == key
+    end
   end
 
   def include?(key)
+    self.each do |node|
+      return true if node.key == key
+    end
+    false
   end
 
   def append(key, val)
@@ -64,18 +70,27 @@ class LinkedList
   end
 
   def update(key, val)
+    self.each do |node|
+      node.val = node.key == key ? val : node.val
+    end 
   end
 
   def remove(key)
+    self.each do |node|
+      if node.key == key
+        node.remove 
+        break
+      end
+    end
   end
 
-  # def each
-  #   current_node = @head.next
-  #   until current_node = @tail
-  #     yield current_node
-  #     current_node = current_node.next
-  #   end
-  # end
+  def each
+    current_node = @head.next
+    until current_node == @tail
+      yield current_node
+      current_node = current_node.next
+    end
+  end
 
 
   # uncomment when you have `each` working and `Enumerable` included
