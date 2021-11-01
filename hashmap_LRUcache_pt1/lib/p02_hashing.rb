@@ -4,18 +4,38 @@ end
 
 class Array
   def hash
+    hash = 0
+    i = 1
+    self.each do |ele|
+      if ele.is_a?(Integer)
+        hash += (ele * i**2).hash
+        i += 1
+      elsif ele.is_a?(String)
+        hash += ele.hash
+        i += 1
+      end
+    end
+    hash
   end
 end
 
 class String
+
   def hash
+    hash = 0
+    chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ /.,1234567890-=`!@#$%^&*()_+~|}{[];'?><"
+    self.each_char.with_index do |char, i|
+      hash += (chars.index(char) * i**2).hash
+    end
+    hash
   end
+  
 end
 
 class Hash
-  # This returns 0 because rspec will break if it returns nil
-  # Make sure to implement an actual Hash#hash method
   def hash
-    0
+    keys = self.keys.sort
+    values = self.values.sort
+    keys.hash + values.hash
   end
 end

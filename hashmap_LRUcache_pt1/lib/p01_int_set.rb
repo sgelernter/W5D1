@@ -105,21 +105,16 @@ class ResizingIntSet
   end
 
   def resize!
-    #debugger
     new_buckets = Array.new(mod) { Array.new }
-    # p "#{mod} firstline"
     duped = @store.dup.flatten
     @store.concat(new_buckets)
     until duped.empty?
       next_ele = duped.shift
       self.remove(next_ele)
       @store[next_ele % (mod * 2)] << next_ele
-      # p mod
       @count += 1
     end
-    debugger
-    # p "#{mod} lastline"
-    mod *= 2
+    @mod *= 2
   end
 
 end
